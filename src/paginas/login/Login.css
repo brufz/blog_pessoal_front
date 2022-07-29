@@ -1,0 +1,15 @@
+.text-decorator-none {
+  text-decoration: none;
+}
+
+.textos1 {
+  font-weight: bold!important;
+}
+
+.imagem {
+  background-image: url(https://images.vexels.com/media/users/3/181393/isolated/preview/abc6233070d9c1c0d0410136d6c5cc62-ilustracao-de-planta-suculenta-de-traco.png);background-repeat: no-repeat; 
+  width: 100vh;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}

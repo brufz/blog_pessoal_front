@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+
+  background-color: #752A2A
+  
+}
+
+Typography {
+  margin-right: 50px;
+}
+
+.text-decorator-none {
+  text-decoration: none;
+}
+
+.cursor {
+  cursor: pointer;
+  color: white;
+}
