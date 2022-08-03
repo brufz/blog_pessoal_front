@@ -1,5 +1,6 @@
 import React from 'react'
-import { Typography, Box, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
+import { Box } from '@mui/material'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'

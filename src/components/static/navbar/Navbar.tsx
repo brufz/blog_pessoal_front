@@ -1,6 +1,6 @@
 import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
+import { Box } from '@mui/material'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import './Navbar.css'
@@ -18,11 +18,14 @@ function Navbar() {
           </Box>
 
           <Box display="flex" justifyContent="start">
+
             <Box mx={1} className = "cursor">
               <Typography variant="h6" color="inherit">
                 Home
               </Typography>
             </Box>
+            
+            
             <Box mx={1} className = "cursor">
               <Typography variant="h6" color="inherit">
                 Postagens

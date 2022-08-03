@@ -1,0 +1,26 @@
+.imagem2{
+  background-image: url(http://cdn5.colorir.com/desenhos/color/202019/cacto-suculenta-natureza-flores-1579365.jpg);
+  background-repeat: no-repeat; 
+  width: 100vh;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.textos2{
+  font-weight: bold;
+}
+
+.btnCadastrar{
+  background-color: #752A2A!important;
+  color: white!important;
+  margin-right: 20px!important;
+  text-decoration: none!important;
+}
+
+.btnCancelar{
+  background-color: #752A2A!important;
+  color: white!important;
+  margin-right: 20px!important;
+  text-decoration: none!important;
+}
