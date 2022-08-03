@@ -1,10 +1,55 @@
-import React from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
+import User from '../../components/models/User'
+import { cadastroUsuario } from '../../components/services/service'
 import { Grid, Typography, Button, TextField } from '@material-ui/core'
 import { Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 import './CadastroUsuario.css'
+import userEvent from '@testing-library/user-event'
 
 function CadastroUsuario() {
+  let navigate = useNavigate()
+  const [confirmarSenha, setConfirmarSenha] = useState<String>('')
+  const [user, setUser] = useState<User>({
+    id: 0,
+    nome: '',
+    usuario: '',
+    senha: ''
+  })
+
+  const [userResult, setUserResult] = useState<User>({
+    id: 0,
+    nome: '',
+    usuario: '',
+    senha: ''
+  })
+
+  useEffect(() => {
+    if (userResult.id != 0) {
+      navigate('/login')
+    }
+  }, [userResult])
+
+  function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
+    setConfirmarSenha(e.target.value)
+  }
+
+  function updatedModel(e: ChangeEvent<HTMLInputElement>) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
+  async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (confirmarSenha == user.senha) {
+      cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
+      alert('Usuario cadastrado com sucesso')
+    } else {
+      alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+    }
+  }
   return (
     <>
       <Grid
@@ -16,7 +61,7 @@ function CadastroUsuario() {
         <Grid item xs={6} className="imagem2"></Grid>
         <Grid item xs={6} alignItems="center">
           <Box paddingX={10}>
-            <form>
+            <form onSubmit={onSubmit}>
               <Typography
                 variant="h3"
                 gutterBottom
@@ -29,6 +74,8 @@ function CadastroUsuario() {
                 Cadastrar{' '}
               </Typography>
               <TextField
+                value={user.nome}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                 id="nome"
                 label="nome"
                 variant="outlined"
@@ -37,6 +84,8 @@ function CadastroUsuario() {
                 fullWidth
               />
               <TextField
+                value={user.usuario}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                 id="usuario"
                 label="usuario"
                 variant="outlined"
@@ -45,6 +94,8 @@ function CadastroUsuario() {
                 fullWidth
               />
               <TextField
+                value={user.senha}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                 id="senha"
                 label="senha"
                 variant="outlined"
@@ -54,6 +105,10 @@ function CadastroUsuario() {
                 fullWidth
               />
               <TextField
+                value={confirmarSenha}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  confirmarSenhaHandle(e)
+                }
                 id="confirmarSenha"
                 label="confirmarSenha"
                 variant="outlined"
@@ -69,9 +124,13 @@ function CadastroUsuario() {
                     Cancelar
                   </Button>
                 </Link>
-                <Button type="submit" variant="contained" className="btnCadastrar">
-                    Cadastrar
-                  </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className="btnCadastrar"
+                >
+                  Cadastrar
+                </Button>
               </Box>
             </form>
           </Box>
