@@ -5,6 +5,10 @@
   background-color: #752A2A
   
 }
+.cursor {
+  cursor: pointer;
+  color: white;
+}
 
 Typography {
   margin-right: 50px;

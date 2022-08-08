@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import User from '../../components/models/User'
-import { cadastroUsuario } from '../../components/services/service'
+import { cadastroUsuario } from '../../components/services/Service'
 import { Grid, Typography, Button, TextField } from '@material-ui/core'
 import { Box } from '@mui/material'
 import { Link } from 'react-router-dom'
