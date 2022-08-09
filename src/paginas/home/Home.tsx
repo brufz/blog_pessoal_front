@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react'
 import { Typography, Grid, Button } from '@material-ui/core'
-import TabPostagem from '../../components/postagens/tabPostagem/TabPostagem'
 import { Box } from '@mui/material'
-import './Home.css'
+import TabPostagem from '../../components/postagens/tabPostagem/TabPostagem'
 import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem'
-import { useNavigate } from 'react-router-dom'
-import useLocalStorage from 'react-use-localstorage'
+import './Home.css'
+import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
+import { TokenState } from '../../store/tokens/TokensReducer'
+import { Link } from 'react-router-dom'
 
 function Home() {
   let navigate = useNavigate()
-  const [token, setToken] = useLocalStorage('token')
+  const token = useSelector<TokenState, TokenState['tokens']>(
+    state => state.tokens
+  )
 
   useEffect(() => {
     if (token == '') {
@@ -17,15 +21,14 @@ function Home() {
       navigate('/login')
     }
   }, [token])
-
   return (
     <>
       <Grid
-        className="caixa"
         container
         direction="row"
         justifyContent="center"
         alignItems="center"
+        className="caixa"
       >
         <Grid alignItems="center" item xs={6}>
           <Box paddingX={20}>
@@ -54,10 +57,12 @@ function Home() {
             <Box marginRight={1}>
               <ModalPostagem />
             </Box>
-            <Button className="button" variant="outlined">
+            <Link to= "/posts">
+            <Button variant="outlined" className="botao">
               Ver Postagens
             </Button>
-          </Box>
+            </Link>
+         </Box>
         </Grid>
         <Grid item xs={6}>
           <img
@@ -74,4 +79,5 @@ function Home() {
     </>
   )
 }
+
 export default Home
