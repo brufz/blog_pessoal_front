@@ -7,11 +7,12 @@ import UserLogin from '../../components/models/UserLogin'
 import './Login.css'
 import { useDispatch } from 'react-redux'
 import { addToken } from '../../store/tokens/Actions'
+import { toast } from 'react-toastify'
 
 function Login() {
-  let navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [token, setToken] = useState('');
+  let navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [token, setToken] = useState('')
   const [userLogin, setUserLogin] = useState<UserLogin>({
     id: 0,
     nome: '',
@@ -28,22 +29,40 @@ function Login() {
   }
 
   useEffect(() => {
-    if (token != ''){
+    if (token != '') {
       dispatch(addToken(token))
       navigate('/home')
     }
   }, [token])
 
-  async function onSubmit(e: ChangeEvent<HTMLFormElement>){
-    e.preventDefault();
-    try{
-        await login(`/usuarios/logar`, userLogin, setToken)
+  async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault()
+    try {
+      await login(`/usuarios/logar`, userLogin, setToken)
 
-        alert('Usuário logado com sucesso!');
-    }catch(error){
-        alert('Dados do usuário inconsistentes. Erro ao logar!');
+      toast.success('Usuário logado com sucesso', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: 'dark',
+        progress: 'undefined'
+      })
+    } catch (error) {
+      toast.error('Dados do usuário inconsistentes. Erro ao logar!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: 'dark',
+        progress: 'undefined'
+      })
     }
-}
+  }
   return (
     <>
       <Grid
